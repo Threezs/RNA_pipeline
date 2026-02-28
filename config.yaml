@@ -1,0 +1,17 @@
+# Configuration for GEO RNA-seq Pipeline
+
+# Input data
+geo_id: "GSEXXXXX" # Replace with actual GEO Accession
+control_group: "Control" # Regex or exact match for control samples in metadata
+treatment_group: "Treatment" # Regex or exact match for treatment samples in metadata
+
+# Statistical Thresholds
+thresholds:
+  padj: 0.05
+  log2fc: 1.0
+  pval_wgcna: 0.05
+  ppi_score: 400
+
+# Optional modules (Set to true/false)
+modules:
+  run_splicing: false # Only set to true if transcript-level data is provided

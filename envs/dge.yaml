@@ -1,0 +1,12 @@
+name: dge_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base=4.3
+  - bioconductor-deseq2
+  - r-tidyverse
+  - r-pheatmap
+  - r-ggplot2
+  - r-ggrepel

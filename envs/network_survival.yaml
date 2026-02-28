@@ -1,0 +1,15 @@
+name: network_survival
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base=4.3
+  - r-wgcna
+  - bioconductor-stringdb
+  - r-survival
+  - r-survminer
+  - bioconductor-tcgabiolinks
+  - r-dplyr
+  - r-readr
+  - r-ggplot2
