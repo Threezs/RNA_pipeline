@@ -37,6 +37,8 @@ def validate(args: argparse.Namespace) -> tuple[list[str], list[str]]:
 
     if args.gene_column not in count_fields:
         errors.append(f"count matrix lacks gene column: {args.gene_column}")
+    elif count_fields[0] != args.gene_column:
+        errors.append("gene identifier column must be the first count-matrix column")
     for column in (args.sample_id_column, args.group_column):
         if column not in meta_fields:
             errors.append(f"metadata lacks required column: {column}")
