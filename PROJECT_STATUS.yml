@@ -18,3 +18,9 @@ scope:
 next_actions:
   - consider a minimal Snakemake fixture run once R/Conda is available
   - document the exact annotation release for each biological project
+last_run:
+  run_id: automation-2026-10-01-01
+  date_utc: 2026-09-30T21:41:51Z
+  git_commit: dc84a84b96333d19970169f4ee426271b41704b2
+  status: passed
+  validation: local Python regression tests and GitHub Actions
