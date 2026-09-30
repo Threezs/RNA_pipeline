@@ -8,6 +8,7 @@ group_column: "group"
 gene_column: "Gene"
 organism: "mouse"        # mouse or human
 string_species: 10090    # 10090 = mouse; 9606 = human
+tf_network_organism: "mouse"
 
 thresholds:
   padj: 0.05

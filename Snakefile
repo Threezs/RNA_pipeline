@@ -136,7 +136,10 @@ rule tf_prediction:
     output:
         acts = "results/tf/tf_activities.csv",
         heat = "results/tf/tf_heatmap.pdf"
+    params:
+        organism = config.get("tf_network_organism", config.get("organism", "mouse"))
     conda:
         "envs/advanced_profiling.yaml"
     shell:
-        "Rscript scripts/tf_prediction.R {input.res} {output.acts} {output.heat}"
+        "Rscript scripts/tf_prediction.R {input.res} {params.organism} "
+        "{output.acts} {output.heat}"
