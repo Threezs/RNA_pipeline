@@ -16,6 +16,5 @@ scope:
     - simulated survival outcomes
     - claims that CPM is TPM
 next_actions:
-  - add explicit species-aware mouse/human test fixtures
-  - add a targets or renv example after the core workflow is stable
-  - add a Quarto manuscript template with citation rendering
+  - consider a minimal Snakemake fixture run once R/Conda is available
+  - document the exact annotation release for each biological project

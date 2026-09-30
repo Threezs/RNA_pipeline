@@ -47,11 +47,13 @@ rule preprocess_matrices:
     output:
         counts_clean = "data/processed/counts_clean.csv",
         tpm_clean = "data/processed/tpm_clean.csv"
+    params:
+        group_col = config.get("group_column", "group")
     conda:
         "envs/fetch.yaml"
     shell:
         "Rscript scripts/preprocess_matrices.R {input.counts} {input.meta} "
-        "{output.counts_clean} {output.tpm_clean}"
+        "{output.counts_clean} {output.tpm_clean} {params.group_col}"
 
 rule dge_analysis:
     input:

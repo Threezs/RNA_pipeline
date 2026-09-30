@@ -19,7 +19,13 @@ a batch effect is absent, or that a GEO matrix contains raw counts rather than
 already-normalized values. Those questions must be documented in the project
 status file and checked against the source study.
 
-## Normalization naming
+## Expression filtering and normalization naming
+
+The R preprocessing step applies `edgeR::filterByExpr()` using the configured
+group column after duplicate gene identifiers have been summed. This is a
+filtering decision, not a differential-expression result, and should be
+reported with the analysis methods.
+
 
 The historical output path data/processed/tpm_clean.csv is kept so existing
 rules remain compatible. The values are CPM computed from raw counts. Do not

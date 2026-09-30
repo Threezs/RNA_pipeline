@@ -2,20 +2,26 @@
 # Clean raw integer counts and write a CPM table for downstream modules.
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) < 4) {
+if (length(args) < 5) {
   stop("Usage: Rscript preprocess_matrices.R <raw_counts.csv> <meta.csv> ",
-       "<out_counts_clean.csv> <out_cpm.csv>")
+       "<out_counts_clean.csv> <out_cpm.csv> <group_column>")
 }
 
 raw_counts_file <- args[[1]]
 meta_file <- args[[2]]
 out_counts <- args[[3]]
 out_cpm <- args[[4]]
+group_column <- args[[5]]
+
+suppressPackageStartupMessages(library(edgeR))
 
 counts <- read.csv(raw_counts_file, check.names = FALSE, stringsAsFactors = FALSE)
 meta <- read.csv(meta_file, check.names = FALSE, stringsAsFactors = FALSE)
 if (ncol(counts) < 2) stop("Count matrix must contain a gene column and samples.")
 if (!"sample_id" %in% names(meta)) stop("Metadata must contain sample_id.")
+if (!group_column %in% names(meta)) {
+  stop("Metadata must contain configured group column: ", group_column)
+}
 
 gene_ids <- trimws(as.character(counts[[1]]))
 if (anyNA(gene_ids) || any(!nzchar(gene_ids))) stop("Gene IDs must be non-empty.")
@@ -36,8 +42,11 @@ rownames(count_mat) <- gene_ids
 
 # Aggregate duplicated gene identifiers by summing counts before filtering.
 count_mat <- rowsum(count_mat, group = rownames(count_mat), reorder = FALSE)
-min_samples <- if (ncol(count_mat) >= 2) 2 else 1
-keep <- rowSums(count_mat >= 10) >= min_samples
+group <- factor(meta[[group_column]][match(colnames(count_mat), meta$sample_id)])
+if (anyNA(group) || nlevels(group) < 2) {
+  stop("The configured group column must match all samples and contain at least two groups.")
+}
+keep <- edgeR::filterByExpr(edgeR::DGEList(counts = count_mat), group = group)
 count_mat <- count_mat[keep, , drop = FALSE]
 if (!nrow(count_mat)) stop("No genes remain after low-expression filtering.")
 

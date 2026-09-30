@@ -6,6 +6,7 @@ channels:
 dependencies:
   - r-base=4.3
   - bioconductor-geoquery
+  - bioconductor-edger
   - r-dplyr
   - r-readr
   - r-stringr

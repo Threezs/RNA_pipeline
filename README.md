@@ -8,13 +8,15 @@ early when a data or metadata assumption is not satisfied.
 ## What is included
 
 - GEO metadata and supplementary-file retrieval.
-- Count-matrix validation, duplicate-gene aggregation, low-expression filtering,
+- Count-matrix validation, duplicate-gene aggregation, edgeR `filterByExpr`
+  low-expression filtering,
   CPM normalization, DESeq2 differential expression, and PCA/volcano plots.
 - GO/KEGG enrichment with a configurable mouse or human annotation database.
 - WGCNA, STRING PPI, quanTIseq immune deconvolution, and decoupleR TF activity
   as optional downstream modules.
 - A literature workflow compatible with Zotero + Better BibTeX + Quarto.
 - Project-status, evidence-extraction, search-log, and manuscript templates.
+- A run-ledger helper and standard-library regression tests for the input gate.
 
 The default workflow does not fabricate data. If a GEO supplementary file is
 missing or cannot be parsed, the run stops with an actionable error.

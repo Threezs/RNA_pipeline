@@ -47,6 +47,10 @@ A run is complete only after output files, the validation report, and
 interpretation notes have been reviewed. A failed or exploratory run should
 remain visible in the ledger rather than being overwritten.
 
+Use `python scripts/record_run.py` to append a run record without replacing
+earlier runs. The helper records the UTC timestamp, Git commit when available,
+SHA-256 of the configuration file, command, status, and notes.
+
 ## Design review
 
 Before interpreting differential expression, record the experimental unit and
