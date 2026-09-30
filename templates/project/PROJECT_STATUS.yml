@@ -1,0 +1,40 @@
+project_id: ""
+title: ""
+owner: ""
+created_utc: ""
+last_updated_utc: ""
+status: planned # planned | active | paused | complete | archived
+question: ""
+organism: ""
+assay: ""
+experimental_unit: ""
+groups:
+  - name: ""
+    n_biological_replicates: 0
+primary_contrast: ""
+primary_endpoint: ""
+data:
+  source: ""
+  accession: ""
+  raw_data_path: ""
+  metadata_path: ""
+  redistribution: allowed # allowed | restricted | prohibited
+methods:
+  filtering: ""
+  normalization: ""
+  primary_model: ""
+  sensitivity_models: []
+  software_versions: []
+evidence:
+  search_log: ""
+  article_records: ""
+  extraction_table: ""
+limitations: []
+next_actions: []
+runs:
+  - run_id: ""
+    date_utc: ""
+    git_commit: ""
+    config_sha256: ""
+    status: planned
+    notes: ""

@@ -1,32 +1,74 @@
-# Public Database RNA-seq Analysis Pipeline
+# Reproducible RNA-seq Analysis Pipeline
 
-This repository contains a fully automated, scalable Snakemake pipeline designed to ingest GEO accession numbers and orchestrate a broad suite of bioinformatics analyses using isolated Conda environments.
+This repository provides a Snakemake workflow for public GEO data and compatible
+local count matrices. R is used for statistical analysis and plotting; Python
+is used for lightweight, dependency-free input validation. The workflow fails
+early when a data or metadata assumption is not satisfied.
 
-## Features
-- **Automated Fetching:** Retrieves author-provided counts and metadata directly from GEO.
-- **Robust Preprocessing:** Cleans gene names, filters low counts, and computes TPM equivalents.
-- **DGE & Enrichment:** DESeq2 and clusterProfiler GO/KEGG pipelines.
-- **Networks & Survival:** WGCNA modules, STRINGdb interactomes, and TCGA correlation Kaplan-Meier curves.
-- **Advanced Profiling:** Tumor Microenvironment immune infiltration estimation (quanTIseq) and Transcription Factor activity inference (decoupleR).
-- **Conditional Handling:** Gracefully handles alternative splicing capabilities depending on raw transcript availability.
+## What is included
 
-## Prerequisites
-- [Snakemake](https://snakemake.readthedocs.io/en/stable/)
-- [Conda/Mamba](https://github.com/conda-forge/miniforge) for automated environment provisioning.
+- GEO metadata and supplementary-file retrieval.
+- Count-matrix validation, duplicate-gene aggregation, low-expression filtering,
+  CPM normalization, DESeq2 differential expression, and PCA/volcano plots.
+- GO/KEGG enrichment with a configurable mouse or human annotation database.
+- WGCNA, STRING PPI, quanTIseq immune deconvolution, and decoupleR TF activity
+  as optional downstream modules.
+- A literature workflow compatible with Zotero + Better BibTeX + Quarto.
+- Project-status, evidence-extraction, search-log, and manuscript templates.
 
-## Quickstart
+The default workflow does not fabricate data. If a GEO supplementary file is
+missing or cannot be parsed, the run stops with an actionable error.
 
-1. **Configure Pipeline:**
-   Edit `config.yaml` to set your target `geo_id` and define your `control_group` and `treatment_group` logic.
+## Quick start
 
-2. **Run Pipeline:**
-   Execute the following command from the project root (adjust cores `-c` as needed):
-   ```bash
-   snakemake --use-conda -c 8
-   ```
+1. Install Snakemake and a Conda/Mamba implementation.
+2. Copy config.yaml to a project-specific configuration and set geo_id,
+   control_group, treatment_group, organism, and metadata column names.
+3. Run:
 
-## Project Standards Adherence
-- Follows strict Snakemake Best Practices.
-- Isolated Conda `envs/*.yaml` definitions ensure 100% reproducibility.
-- Purely relative paths managed via Snakemake working directories.
-- Coding standards adhere to modern clean pipeline practices.
+~~~bash
+snakemake --use-conda --cores 8
+~~~
+
+For an existing local matrix, place files at
+data/raw/counts_raw.csv and data/raw/sample_metadata.csv, then run
+~~~bash
+snakemake --use-conda --cores 8 --until validate_inputs
+~~~
+before starting the full workflow.
+
+## Input contract
+
+counts_raw.csv must contain one gene identifier column followed by integer,
+non-negative sample counts. sample_metadata.csv must contain a unique sample_id
+column, a group column, and one row per count-matrix sample. The sample IDs must
+match exactly. See docs/VALIDATION.md.
+
+The file named tpm_clean.csv is retained for backward compatibility with the
+original repository, but it contains CPM-normalized expression (not TPM),
+because true TPM requires transcript or gene lengths.
+
+## Scope and interpretation
+
+The workflow is a computational template, not a substitute for design review.
+Use biological replicates as the experimental unit, record batch and other
+covariates in metadata, and inspect sample-level QC before interpreting
+differential expression. Survival analysis is excluded from the default target
+list because it requires matched clinical data; it must never use simulated data.
+
+## Reproducibility
+
+Use the Conda environment files under envs/, commit configuration and logs, and
+record the Git commit used for each result. For a research compendium, see
+docs/REPRODUCIBILITY.md and templates/.
+
+## References
+
+- Snakemake best practices:
+  https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html
+- DESeq2 vignette:
+  https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html
+- targets user manual: https://books.ropensci.org/targets/
+- rrtools research compendium: https://github.com/benmarwick/rrtools
+- Better BibTeX automatic export:
+  https://retorque.re/zotero-better-bibtex/exporting/auto/

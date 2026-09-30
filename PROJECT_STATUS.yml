@@ -1,0 +1,21 @@
+project_id: RNA_pipeline
+title: Reproducible RNA-seq analysis pipeline
+owner: Threezs
+created_utc: 2026-09-30
+last_updated_utc: 2026-10-01
+status: active
+question: Provide a safe, reproducible starting point for GEO or local bulk RNA-seq analyses.
+scope:
+  included:
+    - count-matrix validation
+    - DESeq2 differential expression
+    - enrichment and optional downstream modules
+    - literature and evidence templates
+  excluded:
+    - fabricated fallback data
+    - simulated survival outcomes
+    - claims that CPM is TPM
+next_actions:
+  - add explicit species-aware mouse/human test fixtures
+  - add a targets or renv example after the core workflow is stable
+  - add a Quarto manuscript template with citation rendering

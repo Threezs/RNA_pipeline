@@ -1,0 +1,21 @@
+name: validate-template
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-and-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile Python utilities
+        run: python -m py_compile scripts/validate_project.py
+      - name: Validate tracked template files
+        run: |
+          test -s README.md
+          test -s config.yaml
+          test -s Snakefile
+          test -s docs/VALIDATION.md
+          test -s templates/project/PROJECT_STATUS.yml
+          test -s templates/literature/article_records.tsv
