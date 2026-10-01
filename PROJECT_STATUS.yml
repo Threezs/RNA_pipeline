@@ -2,7 +2,7 @@ project_id: RNA_pipeline
 title: Reproducible RNA-seq analysis pipeline
 owner: Threezs
 created_utc: 2026-09-30
-last_updated_utc: 2026-10-01
+last_updated_utc: 2026-10-02
 status: active
 question: Provide a safe, reproducible starting point for GEO or local bulk RNA-seq analyses.
 scope:
@@ -16,11 +16,11 @@ scope:
     - simulated survival outcomes
     - claims that CPM is TPM
 next_actions:
-  - consider a minimal Snakemake fixture run once R/Conda is available
+  - add a minimal end-to-end Snakemake fixture covering DESeq2 after the R smoke test remains stable
   - document the exact annotation release for each biological project
 last_run:
-  run_id: automation-2026-10-01-01
-  date_utc: 2026-09-30T21:41:51Z
-  git_commit: dc84a84b96333d19970169f4ee426271b41704b2
+  run_id: automation-2026-10-02-01
+  date_utc: 2026-10-01T21:32:22Z
+  git_commit: e647f5442b598904ba384d01a66a2f6b81b1bc72
   status: passed
-  validation: local Python regression tests and GitHub Actions
+  validation: "local Python regression tests; GitHub Actions Python and R smoke tests (run 36929167928)"
