@@ -34,8 +34,8 @@ describe them as TPM in a manuscript unless lengths were used.
 ## Automated regression checks
 
 GitHub Actions runs both the dependency-free Python input checks and a real R
-preprocessing smoke test. The R test installs edgeR, processes a four-sample
-fixture, and verifies that:
+preprocessing smoke test. The R job installs edgeR with Bioconductor's
+`BiocManager`, processes a four-sample fixture, and verifies that:
 
 - duplicate gene identifiers are summed before filtering;
 - a gene expressed in only one replicate is removed by the group-aware filter;

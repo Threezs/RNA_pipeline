@@ -4,10 +4,13 @@
 
 - Added a four-sample count/metadata fixture and a base-R regression test that
   executes the real edgeR preprocessing script.
-- Added a dedicated GitHub Actions R job that installs edgeR and checks duplicate
-  aggregation, group-aware filtering, metadata matching, and CPM invariants.
+- Added a dedicated GitHub Actions R job that installs edgeR through
+  Bioconductor's `BiocManager` and checks duplicate aggregation, group-aware
+  filtering, metadata matching, and CPM invariants.
 - Restricted workflow permissions to read-only repository contents and updated
   the checkout action used by validation jobs.
+- Added branch-level workflow concurrency so a stale dependency installation is
+  cancelled when a newer validation commit is pushed.
 - Documented what the smoke test proves and that its synthetic fixture is not
   biological example data.
 
