@@ -1,0 +1,6 @@
+Gene,S1,S2,S3,S4
+GeneA,100,120,90,110
+GeneA,10,10,10,10
+GeneB,50,60,55,58
+GeneSparse,0,0,25,0
+GeneLow,0,0,1,0

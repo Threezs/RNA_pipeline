@@ -31,6 +31,21 @@ The historical output path data/processed/tpm_clean.csv is kept so existing
 rules remain compatible. The values are CPM computed from raw counts. Do not
 describe them as TPM in a manuscript unless lengths were used.
 
+## Automated regression checks
+
+GitHub Actions runs both the dependency-free Python input checks and a real R
+preprocessing smoke test. The R test installs edgeR, processes a four-sample
+fixture, and verifies that:
+
+- duplicate gene identifiers are summed before filtering;
+- a gene expressed in only one replicate is removed by the group-aware filter;
+- sample order is matched by `sample_id`, not metadata row position; and
+- every retained CPM column sums to one million within numerical tolerance.
+
+Run the same check locally with `Rscript tests/test_preprocess.R`. The fixture is
+only a deterministic software regression test; it is not biological example
+data and must never be used for interpretation.
+
 ## Module validity
 
 - DESeq2 receives raw integer counts only.

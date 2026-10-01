@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-02 (automation run)
+
+- Added a four-sample count/metadata fixture and a base-R regression test that
+  executes the real edgeR preprocessing script.
+- Added a dedicated GitHub Actions R job that installs edgeR and checks duplicate
+  aggregation, group-aware filtering, metadata matching, and CPM invariants.
+- Restricted workflow permissions to read-only repository contents and updated
+  the checkout action used by validation jobs.
+- Documented what the smoke test proves and that its synthetic fixture is not
+  biological example data.
+
 ## 2026-10-01 (automation run)
 
 - Replaced the fixed low-count cutoff with `edgeR::filterByExpr()` using the
