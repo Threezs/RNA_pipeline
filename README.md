@@ -74,3 +74,12 @@ docs/REPRODUCIBILITY.md and templates/.
 - rrtools research compendium: https://github.com/benmarwick/rrtools
 - Better BibTeX automatic export:
   https://retorque.re/zotero-better-bibtex/exporting/auto/
+
+## Companion repositories
+
+The reusable downstream and literature components now live in separate private repositories:
+
+- [bioinformatics-literature-workbench](https://github.com/Threezs/bioinformatics-literature-workbench) — Zotero/BibTeX metadata, reading notes and claim-level evidence.
+- [rnaseq-analysis-template](https://github.com/Threezs/rnaseq-analysis-template) — R-first count-matrix analysis with edgeR QL, DESeq2, limma, ORA and GSEA.
+- [research-compendium-template-r](https://github.com/Threezs/research-compendium-template-r) — targets + renv + Quarto project skeleton.
+- [bioinformatics-methods-cookbook](https://github.com/Threezs/bioinformatics-methods-cookbook) — reusable R/Python method recipes.
